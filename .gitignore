@@ -4,10 +4,11 @@
 /node_modules
 /.pnp
 .pnp.js
-
+/public/js
+/public/css
 # testing
 /coverage
-
+#Use bootstrap in public/js y public/css
 # production
 /build
 
