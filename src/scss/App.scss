@@ -81,6 +81,7 @@ body {
             transition: 0.5s;
             cursor: pointer;
         }
+
         li:nth-child(3).active {
             opacity: 1;
             background-color: #2BBA44;
@@ -336,15 +337,17 @@ body {
             user-select: none;
             justify-content: space-between;
             cursor: pointer;
-            ion-icon{
+
+            ion-icon {
                 font-size: 20px;
             }
         }
 
-        .nodes.active,.polygons.active{
+        .nodes.active,
+        .polygons.active {
             padding: 0px 12px 12px 12px;
             height: fit-content;
-            overflow:initial;
+            overflow: initial;
         }
 
         .nodes {
@@ -356,11 +359,13 @@ body {
             height: 0;
             overflow: hidden;
             border-bottom: solid 2px $black_12dp;
-            .node.active{
+
+            .node.active {
                 height: fit-content;
             }
 
             .node {
+                
                 padding: 12px;
                 color: white;
                 background-color: $black_12dp;
@@ -370,6 +375,7 @@ body {
                 overflow: hidden;
                 height: 48px;
                 gap: 12px;
+
                 .header {
                     border: 0;
                     display: flex;
@@ -378,7 +384,10 @@ body {
                     padding: 0;
                     gap: 12px;
                     cursor: pointer;
-
+                    span{
+                        -webkit-user-select: none;
+                        user-select: none;
+                    }
                     ion-icon {
                         font-size: 20px;
                         opacity: 0.5;
@@ -415,9 +424,9 @@ body {
             }
         }
 
-        
 
-        .polygons{
+
+        .polygons {
             padding: 0;
             height: 0;
             overflow: hidden;
@@ -427,7 +436,8 @@ body {
             gap: 12px;
             border-bottom: solid 2px $black_12dp;
             cursor: pointer;
-            .polygon{
+
+            .polygon {
                 padding: 12px;
                 color: white;
                 background-color: $black_12dp;
@@ -437,8 +447,10 @@ body {
                 align-items: center;
                 position: relative;
                 height: fit-content;
-                gap:12px;
-                .color{
+                gap: 12px;
+                -webkit-user-select: none;
+                user-select: none;
+                .color {
                     height: 32px;
                     width: 32px;
                     border-radius: 6px;
@@ -495,6 +507,7 @@ body {
     ::-webkit-scrollbar-thumb {
         background-color: #53aaf9;
     }
+
     .pointsList {
         height: calc(100% - 87px);
         max-height: calc(100% - 87px);
@@ -635,7 +648,7 @@ body {
 
 }
 
-.GraphComponent{
+.GraphComponent {
     width: 100%;
     height: 100%;
     margin: 0;
@@ -663,5 +676,97 @@ body {
         gap: 6px;
         border-bottom: 2px solid;
         border-image-slice: 1;
+    }
+
+    .emptyData {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        height: 100%;
+        ion-icon {
+            font-size: 50px;
+            opacity: 0.5;
+        }
+
+        span {
+            opacity: 0.5;
+        }
+    }
+
+    .inputNodes {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+        padding: 12px;
+        cursor: pointer;
+
+        .icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            font-size: 20px;
+            opacity: 0.5;
+            transition: 0.5s;
+            border-radius: 6px;
+        }
+
+        .icon:hover{
+            background-color: #2BBA44;
+            transition: 0.5s;
+            opacity: 1;
+        }
+
+        .inputs {
+            width:calc(100% - 44px);
+            height: 32px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            .xP {
+                width: 50%;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                height: 100%;
+
+                span {
+                    height: fit-content;
+                    opacity: 0.5;
+                }
+
+                select {
+                    width: 100%;
+                    background-color: $black_12dp;
+                    border: 0;
+                    color: white;
+                    padding: 6px;
+                    border-radius: 6px;
+                }
+            }
+        }
+
+        input {
+            background-color: transparent;
+            border-style: solid;
+            border-color: transparent;
+            border: double 0px transparent;
+            color: white;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        border-bottom: 1px solid $black_16dp;
+
     }
 }
