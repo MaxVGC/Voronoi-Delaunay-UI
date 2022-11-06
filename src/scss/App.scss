@@ -81,6 +81,10 @@ body {
             transition: 0.5s;
             cursor: pointer;
         }
+        li:nth-child(3).active {
+            opacity: 1;
+            background-color: #2BBA44;
+        }
 
         li:nth-child(2).active {
             opacity: 1;
@@ -176,7 +180,7 @@ body {
         }
 
         #btn-voronoi.active {
-            color: #2BBA44;
+            color: #BA1CA5;
 
             ion-icon {
                 opacity: 1;
@@ -187,7 +191,7 @@ body {
         }
 
         #btn-delaunay.active {
-            color: #BA1CA5;
+            color: #2BBA44;
 
             ion-icon {
                 opacity: 1;
@@ -251,6 +255,34 @@ body {
         border-image-slice: 1;
     }
 
+    .headerData {
+        padding: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: solid 2px $black_12dp;
+
+        .icon {
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    ::-webkit-scrollbar {
+        width: 6px !important;
+    }
+
+    ::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: #FA514A;
+    }
+
     .infoList {
         height: calc(100% - 108px);
         max-height: calc(100% - 108px);
@@ -295,65 +327,127 @@ body {
             }
         }
 
-        .headerData {
-            padding: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: solid 2px $black_12dp;
-
-            .icon {
-                cursor: pointer;
-                font-size: 20px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-        }
-
         .data {
             padding: 12px 12px 12px 12px;
             display: flex;
-            justify-content: center;
-            flex-direction: column;
+            flex-direction: row;
+            align-items: center;
+            -webkit-user-select: none;
+            user-select: none;
+            justify-content: space-between;
+            cursor: pointer;
+            ion-icon{
+                font-size: 20px;
+            }
+        }
+
+        .nodes.active,.polygons.active{
+            padding: 0px 12px 12px 12px;
+            height: fit-content;
+            overflow:initial;
         }
 
         .nodes {
-            padding: 0 12px 12px 12px;
+            padding: 0;
             display: flex;
             justify-content: center;
             flex-direction: column;
             gap: 12px;
-            .node{
+            height: 0;
+            overflow: hidden;
+            border-bottom: solid 2px $black_12dp;
+            .node.active{
+                height: fit-content;
+            }
+
+            .node {
                 padding: 12px;
                 color: white;
                 background-color: $black_12dp;
                 border-radius: 12px;
-                .header{
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
+                height: 48px;
+                gap: 12px;
+                .header {
                     border: 0;
                     display: flex;
                     flex-direction: row;
                     align-items: center;
                     padding: 0;
                     gap: 12px;
-                    ion-icon{
+                    cursor: pointer;
+
+                    ion-icon {
                         font-size: 20px;
                         opacity: 0.5;
                         transition: 0.5s;
                     }
                 }
-                .header.active{
-                    ion-icon{
+
+                .header.active {
+                    ion-icon {
                         font-size: 20px;
                         opacity: 1;
                         color: #BA1E18;
                         transition: 0.5s;
                     }
                 }
+
+                .nodesList {
+                    table {
+                        width: 100%;
+                        background-color: $black_24dp;
+                        border-radius: 6px;
+
+                        td {
+                            opacity: 0.5;
+                        }
+
+                        th,
+                        td {
+                            padding: 12px;
+                            font-weight: initial;
+                        }
+                    }
+                }
             }
         }
 
         
+
+        .polygons{
+            padding: 0;
+            height: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            gap: 12px;
+            border-bottom: solid 2px $black_12dp;
+            cursor: pointer;
+            .polygon{
+                padding: 12px;
+                color: white;
+                background-color: $black_12dp;
+                border-radius: 12px;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                position: relative;
+                height: fit-content;
+                gap:12px;
+                .color{
+                    height: 32px;
+                    width: 32px;
+                    border-radius: 6px;
+                }
+            }
+
+        }
+
+
     }
 
 
@@ -390,6 +484,17 @@ body {
 
     }
 
+    ::-webkit-scrollbar {
+        width: 6px !important;
+    }
+
+    ::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: #53aaf9;
+    }
     .pointsList {
         height: calc(100% - 87px);
         max-height: calc(100% - 87px);
@@ -528,4 +633,35 @@ body {
     }
 
 
+}
+
+.GraphComponent{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    max-height: 100vh;
+    font-family: gilroyLight;
+    color: white;
+    display: flex;
+    flex-direction: column;
+
+    .header {
+        padding: 12px;
+
+        .title {
+            font-size: 34px;
+            line-height: 34px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            opacity: 0.5;
+        }
+
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        border-bottom: 2px solid;
+        border-image-slice: 1;
+    }
 }

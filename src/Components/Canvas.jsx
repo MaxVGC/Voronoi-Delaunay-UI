@@ -71,7 +71,7 @@ export default function Canvas({ eleContainer }) {
                 aux.push(e.x);
                 aux.push(e.y);
               });
-              return <Line points={aux} fill={element.color} closed="true" />
+              return <Line points={aux} fill={dataStore.currentPolygon?.x==element.point.x && dataStore.currentPolygon?.y==element.point.y?("#FA514A"):(element.color)} closed="true" />
             })}
           </Layer>
         )}
@@ -85,8 +85,8 @@ export default function Canvas({ eleContainer }) {
           </Layer>
         )}
         <Layer>
-          {pointsStore.points.map((element, key) => (
-            <Circle key={key} x={element.x} y={element.y} radius={6 / stage.scale} fill={dataStore.currentNode.x==element.x && dataStore.currentNode.y==element.y?("#BA1E18"):("#1d59b9")}  />
+          {pointsStore.points.map((element, key) => (      
+            <Circle key={key} x={element.x} y={element.y} radius={6 / stage.scale} fill={dataStore.currentNode?.x==element.x && dataStore.currentNode?.y==element.y?("#BA1E18"):("#1d59b9")}  />
           ))}
         </Layer>
       </Stage>

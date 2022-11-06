@@ -2,11 +2,18 @@
 const initialState = {
     isVisibleVoronoi: true,
     isVisibleDelaunay: true,
-    currentNode: null
+    currentNode: null,
+    currentPolygon:null
 };
 
 export const dataReducer = (state = initialState, action) => {
     switch (action.type) {
+        case "SET_CURRENT_POLYGON":
+            if (action.payload == state.currentPolygon) {
+                return { ...state, currentPolygon: null }
+            }
+            return { ...state, currentPolygon: action.payload }
+
         case "SET_CURRENT_NODE":
             if (action.payload == state.currentNode) {
                 return { ...state, currentNode: null }
