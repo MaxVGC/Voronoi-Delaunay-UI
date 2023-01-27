@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { useEffect } from 'react';
 import { Stage, Layer, Circle, Line } from 'react-konva';
-import { useSelector,useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function Canvas({ eleContainer }) {
   const canvas = useRef();
@@ -39,7 +39,13 @@ export default function Canvas({ eleContainer }) {
     });
   };
 
- 
+  function fitStage(stage) {
+    console.log(stage)
+  }
+
+
+
+
   useEffect(() => {
     setstageSize({
       width: eleContainer.current.offsetWidth,
@@ -62,8 +68,8 @@ export default function Canvas({ eleContainer }) {
 
   return (
     <div id='canvas'>
-      <Stage width={stageSize.width} onWheel={handleWheel} height={stageSize.height} draggable={true} scaleX={stage.scale} scaleY={-1 * stage.scale} x={stage.x} y={stage.y}>
-        {dataStore.voronoiPolygons == null || dataStore.isVisibleVoronoi==false? (null) : (
+      <Stage width={stageSize.width} onWheel={handleWheel} height={stageSize.height} draggable={true} scaleX={stage.scale} scaleY={-1 * stage.scale} x={stage.x} y={stage.y} onDblClick={(e) => (fitStage(e.currentTarget))}>
+        {dataStore.voronoiPolygons == null || dataStore.isVisibleVoronoi == false ? (null) : (
           <Layer>
             {dataStore.voronoiPolygons.map((element, key) => {
               var aux = [];
@@ -71,28 +77,38 @@ export default function Canvas({ eleContainer }) {
                 aux.push(e.x);
                 aux.push(e.y);
               });
-              return <Line points={aux} fill={dataStore.currentPolygon?.x==element.point.x && dataStore.currentPolygon?.y==element.point.y?("#FA514A"):(element.color)} closed="true" />
+              return <Line points={aux} fill={dataStore.currentPolygon?.x == element.point.x && dataStore.currentPolygon?.y == element.point.y ? ("#FA514A") : (element.color)} closed="true" />
             })}
           </Layer>
         )}
-        {dataStore.delaunaySegments == null || dataStore.isVisibleDelaunay==false ? (null) : (
+        {dataStore.delaunaySegments == null || dataStore.isVisibleDelaunay == false ? (null) : (
           <Layer>
             {dataStore.delaunaySegments.map((element, key) => (
               element.segment.map((ele2) => (
-                <Line points={[element.root.x, element.root.y, ele2.x, ele2.y]} fill="red" stroke="white" strokeWidth={0.01} />
+                <Line points={[element.root.x, element.root.y, ele2.x, ele2.y]} fill="red" stroke="#ffffff80" strokeWidth={0.01} />
               ))
             ))}
           </Layer>
         )}
+        {dataStore.pathDijkstra == null ? (null) : (
+          <Layer>
+            {dataStore.pathDijkstra.mostShortPath.map((element, key) => {
+              return <Line points={[element.from.x, element.from.y, element.to.x, element.to.y]} fill="#2BBA44" stroke="#2BBA44" strokeWidth={0.03} />
+
+            })}
+          </Layer>
+        )}
         <Layer>
-          {pointsStore.points.map((element, key) => (      
-            <Circle key={key} x={element.x} y={element.y} radius={6 / stage.scale} fill={dataStore.currentNode?.x==element.x && dataStore.currentNode?.y==element.y?("#BA1E18"):("#1d59b9")}  />
+          {pointsStore.points.map((element, key) => (
+            <>
+              <Circle key={key} x={element.x} y={element.y} radius={6 / stage.scale} fill={dataStore.currentNode?.x == element.x && dataStore.currentNode?.y == element.y ? ("#BA1E18") : ("#1d59b9")} />
+            </>
           ))}
         </Layer>
       </Stage>
       <div id="btn-home" onClick={() => { setStage({ scale: 100, x: (eleContainer.current.offsetWidth / 2), y: (eleContainer.current.offsetHeight / 2) }) }}><ion-icon name="home"></ion-icon></div>
-      <div id="btn-voronoi" className={dataStore.isVisibleVoronoi?('active'):('')} onClick={() => (dispatch({type: "TOOGLE_VISIBLE",payload: "voronoi"}))}><ion-icon name="prism"></ion-icon></div>
-      <div id="btn-delaunay" className={dataStore.isVisibleDelaunay?('active'):('')} onClick={() => (dispatch({type: "TOOGLE_VISIBLE",payload: "delaunay"}))}><ion-icon name="analytics"></ion-icon></div>
+      <div id="btn-voronoi" className={dataStore.isVisibleVoronoi ? ('active') : ('')} onClick={() => (dispatch({ type: "TOOGLE_VISIBLE", payload: "voronoi" }))}><ion-icon name="prism"></ion-icon></div>
+      <div id="btn-delaunay" className={dataStore.isVisibleDelaunay ? ('active') : ('')} onClick={() => (dispatch({ type: "TOOGLE_VISIBLE", payload: "delaunay" }))}><ion-icon name="analytics"></ion-icon></div>
 
     </div>
   )

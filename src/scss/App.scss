@@ -365,7 +365,7 @@ body {
             }
 
             .node {
-                
+
                 padding: 12px;
                 color: white;
                 background-color: $black_12dp;
@@ -384,10 +384,12 @@ body {
                     padding: 0;
                     gap: 12px;
                     cursor: pointer;
-                    span{
+
+                    span {
                         -webkit-user-select: none;
                         user-select: none;
                     }
+
                     ion-icon {
                         font-size: 20px;
                         opacity: 0.5;
@@ -450,6 +452,7 @@ body {
                 gap: 12px;
                 -webkit-user-select: none;
                 user-select: none;
+
                 .color {
                     height: 32px;
                     width: 32px;
@@ -685,6 +688,7 @@ body {
         justify-content: center;
         gap: 12px;
         height: 100%;
+
         ion-icon {
             font-size: 50px;
             opacity: 0.5;
@@ -692,6 +696,90 @@ body {
 
         span {
             opacity: 0.5;
+        }
+    }
+    .totalDistance{
+        border-bottom: 1px solid $black_16dp;
+        padding: 12px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+        .label{
+            opacity: 0.5;
+        }
+        .number{
+            font-size: 20px;
+        }
+    }
+
+    .divPathInfo {
+        height: 100%;
+        padding: 12px 12px 0px 12px;
+        overflow: auto;
+
+        &::-webkit-scrollbar {
+            width: 6px !important;
+        }
+
+        &::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: #2BBA44;
+        }
+
+        .cardPathInfo {
+            background-color: #2d2d2d;
+            border-radius: 12px;
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 12px;
+
+            .header {
+                border: 0;
+                width: 100%;
+                padding: 0;
+            }
+
+            .infoPath {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+
+                .box {
+                    position: relative;
+                    width: 33%;
+                    height: 80px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 12px;
+                    align-items: center;
+                    font-size: 50px;
+                    justify-content: center;
+
+                    .name {
+                        opacity: 0.75;
+                        height: 50px;
+                    }
+
+                    .distance {
+                        position: absolute;
+                        bottom: -2px;
+                        color: #2BBA44;
+                        font-size: 14px;
+                    }
+
+                    .label {
+                        font-size: 12px;
+                    }
+
+                    ion-icon {
+                        opacity: 0.5;
+                    }
+                }
+            }
         }
     }
 
@@ -715,14 +803,14 @@ body {
             border-radius: 6px;
         }
 
-        .icon:hover{
+        .icon:hover {
             background-color: #2BBA44;
             transition: 0.5s;
             opacity: 1;
         }
 
         .inputs {
-            width:calc(100% - 44px);
+            width: calc(100% - 44px);
             height: 32px;
             padding: 0;
             display: flex;

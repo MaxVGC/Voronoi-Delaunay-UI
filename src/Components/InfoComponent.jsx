@@ -19,7 +19,7 @@ export default function InfoComponent() {
         return "#" +
             ("00" + randgp(256).toString(16)).slice(-2) +
             ("00" + randgp(256).toString(16)).slice(-2) +
-            ("00" + randgp(256).toString(16)).slice(-2)
+            ("00" + randgp(256).toString(16)).slice(-2) + "80"
     }
 
 

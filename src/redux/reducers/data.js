@@ -3,11 +3,14 @@ const initialState = {
     isVisibleVoronoi: true,
     isVisibleDelaunay: true,
     currentNode: null,
-    currentPolygon:null
+    currentPolygon:null,
+    pathDijkstra:null
 };
 
 export const dataReducer = (state = initialState, action) => {
     switch (action.type) {
+        case "SET_PATH_DIJKSTRA":
+            return {...state,pathDijkstra:action.payload}
         case "SET_CURRENT_POLYGON":
             if (action.payload == state.currentPolygon) {
                 return { ...state, currentPolygon: null }
