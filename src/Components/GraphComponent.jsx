@@ -101,7 +101,6 @@ export default function GraphComponent() {
                                             <div className="box">
                                                 <span className="name">{element.to.name}</span>
                                                 <span className="label">Nodo</span>
-
                                             </div>
                                         </div>
                                     </div>

@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 import { useEffect } from 'react';
-import { Stage, Layer, Circle, Line } from 'react-konva';
+import { Stage, Layer, Circle, Line, Group, Label, Text } from 'react-konva';
 import { useSelector, useDispatch } from 'react-redux';
 
 export default function Canvas({ eleContainer }) {
@@ -77,7 +77,7 @@ export default function Canvas({ eleContainer }) {
                 aux.push(e.x);
                 aux.push(e.y);
               });
-              return <Line points={aux} fill={dataStore.currentPolygon?.x == element.point.x && dataStore.currentPolygon?.y == element.point.y ? ("#FA514A") : (element.color)} closed="true" />
+              return <Line points={aux} fill={dataStore.currentPolygon?.x == element.point.x && dataStore.currentPolygon?.y == element.point.y ? ("#FA514A") : (element.color)} closed="true" strokeWidth={0.06} stroke={element.color+""} />
             })}
           </Layer>
         )}
@@ -85,7 +85,7 @@ export default function Canvas({ eleContainer }) {
           <Layer>
             {dataStore.delaunaySegments.map((element, key) => (
               element.segment.map((ele2) => (
-                <Line points={[element.root.x, element.root.y, ele2.x, ele2.y]} fill="red" stroke="#ffffff80" strokeWidth={0.01} />
+                <Line points={[element.root.x, element.root.y, ele2.x, ele2.y]} fill="red" stroke="#ffffff26" strokeWidth={0.01} />
               ))
             ))}
           </Layer>
@@ -94,16 +94,22 @@ export default function Canvas({ eleContainer }) {
           <Layer>
             {dataStore.pathDijkstra.mostShortPath.map((element, key) => {
               return <Line points={[element.from.x, element.from.y, element.to.x, element.to.y]} fill="#2BBA44" stroke="#2BBA44" strokeWidth={0.03} />
-
             })}
           </Layer>
         )}
         <Layer>
-          {pointsStore.points.map((element, key) => (
-            <>
-              <Circle key={key} x={element.x} y={element.y} radius={6 / stage.scale} fill={dataStore.currentNode?.x == element.x && dataStore.currentNode?.y == element.y ? ("#BA1E18") : ("#1d59b9")} />
-            </>
-          ))}
+          {pointsStore.points.map((element, key) => {
+            return <Group>
+              <Circle key={key} x={element.x} y={element.y} radius={10 / stage.scale} stroke={"#188bba"} strokeWidth={0.02} fill={dataStore.currentNode?.x == element.x && dataStore.currentNode?.y == element.y ? ("#BA1E18") : ("#1d59b9")} />
+              <Label x={element.x} y={element.y}>
+                {dataStore?.delaunaySegments?.map((ele) => {
+                  if (ele.root.x == element.x && ele.root.y == element.y) {
+                    return <Text text={ele.root.name} fill="#ffffff" fontSize={0.2} scaleY={-1} draggable={true} />
+                  }
+                })}
+              </Label>
+            </Group>
+          })}
         </Layer>
       </Stage>
       <div id="btn-home" onClick={() => { setStage({ scale: 100, x: (eleContainer.current.offsetWidth / 2), y: (eleContainer.current.offsetHeight / 2) }) }}><ion-icon name="home"></ion-icon></div>
